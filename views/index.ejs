@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>cart | Demo</title>
+  </head>
+  <body>
+    <h1 class="display--1 title mt-l">Session Product Demo</h1>
+    <div class="container mt-l">
+      <h1 class="display--1">Product list</h1>
+      <ul class="product-list"></ul>
+    </div>
+
+    <div class="container mt-s checkout">
+      <h1 class="display--1">Checkout List</h1>
+      <table class="table">
+        <tr class="table-heading">
+          <th>Item</th>
+          <th>Remove</th>
+          <th>Amount</th>
+          <th>Price</th>
+        </tr>
+
+        <tr class="no-items">
+          <td class="cart--info" colspan="4">Add Products to Cart</td>
+        </tr>
+      </table>
+    </div>
+    <div class="center">
+      <button>CheckOut</button>
+    </div>
+
+    <script src="/js/session.js"></script>
+  </body>
+</html>
