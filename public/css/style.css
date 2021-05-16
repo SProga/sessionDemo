@@ -20,7 +20,11 @@ body {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .title {
-  color: #37474f !important;
+  background-color: #f907fc;
+  background-image: linear-gradient(315deg, #f907fc 0%, #05d6d9 74%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 .container {
   width: 40%;
@@ -105,10 +109,13 @@ body {
   content: "-";
 }
 
-.display--1 {
+.display--1,
+.title {
   font-size: 2rem;
-  color: rgb(235, 235, 235);
   text-align: center;
+}
+.display--1 {
+  color: rgb(235, 235, 235);
 }
 
 .table {
@@ -139,7 +146,11 @@ body {
 .cart--info {
   font-size: 2rem;
   width: 100%;
-  color: rgb(11, 127, 156);
+  background-color: #f907fc;
+  background-image: linear-gradient(315deg, #f907fc 0%, #05d6d9 74%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .icon {

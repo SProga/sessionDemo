@@ -17,6 +17,7 @@ window.addEventListener("load", (event) => {
       createProduct(product, itemListDiv);
     });
     addEventHandlers();
+    checkoutProduct(); //check session to see if any data is in the cart
   });
 
   function addEventHandlers() {
@@ -98,6 +99,8 @@ window.addEventListener("load", (event) => {
 
   const checkoutCart = function (product) {
     let table = document.querySelector(".table");
+    let Total = 0;
+
     table.innerHTML =
       "<tr class='table-heading'><th>Item</th><th>Remove</th><th>Amount</th><th>Price</th></tr>";
     if (product.length > 0) {
@@ -113,9 +116,19 @@ window.addEventListener("load", (event) => {
         cell2.appendChild(spanRemove);
         cell3.innerHTML = "<td>" + product[i]["qty"] + "</td>";
         cell4.innerHTML = "<td>" + "$" + product[i]["price"] + "</td>";
+        Total = Total + product[i]["price"];
         productQuantityHandlers();
       }
     }
+    let pricerow = table.insertRow(-1);
+    pricerow.insertCell(0);
+    pricerow.insertCell(1);
+    let total = pricerow.insertCell(2);
+    let priceCell = pricerow.insertCell(3);
+    total.innerHTML = "<td> Total: </td>";
+    total.style.backgroundColor = "#fff";
+    priceCell.innerHTML = "<td>$" + Total + "</td>";
+    priceCell.style.backgroundColor = "#fff";
   };
   function emptyCart() {
     let table = document.querySelector(".table");

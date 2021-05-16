@@ -23,8 +23,8 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 //whenever you have this middle ware set up on every request object
 //incoming request will have a session property available
-//resave is a value that defaults to true , don't use default set manually
-//set resave to false
+//re-save is a value that defaults to true , don't use default set manually
+//set re-save to false
 //CONST
 const cart = new Array();
 PRODUCT_PRICES = { Banana: 7, Apple: 3, WaterMelon: 1, Kiwi: 3, Grapes: 5 };
