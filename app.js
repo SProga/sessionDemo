@@ -11,6 +11,7 @@ const sessionConfig = {
   secret: "thisisnotagoodsecret",
   resave: false,
   saveUninitialized: false,
+  cookie: { maxAge: 60000 },
 };
 
 app.engine("ejs", ejsMate);
@@ -71,7 +72,7 @@ app.post("/cart", (req, res) => {
 
 app.get("/cart/all", (req, res) => {
   const products = req.session.cart;
-  res.json(products);
+  res.send(products);
 });
 
 app.post("/cart/removeItem", (req, res) => {
