@@ -141,4 +141,11 @@ window.addEventListener("load", (event) => {
     table.appendChild(noticeRow);
   }
   checkoutProduct();
+
+  let checkoutbtn = document.querySelector(".btn-checkout");
+  let overlay = document.querySelector(".overlay");
+  checkoutbtn.addEventListener("click", () => {
+    overlay.style.opacity = "1";
+    overlay.style.visibility = "visible";
+  });
 });
