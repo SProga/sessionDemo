@@ -46,7 +46,6 @@ app.get("/", (req, res) => {
 });
 
 app.get("/products", (req, res) => {
-  console.log(product);
   res.send(req.session.cart);
 });
 
@@ -81,7 +80,7 @@ app.post("/cart/removeItem", (req, res) => {
   const item = filter[0];
 
   if (cart && cart.length > 0) {
-    if (item.qty > 0) {
+    if (item.qty >= 1) {
       item.qty--;
       item.price = item.price - PRODUCT_PRICES[item["name"]];
     }
