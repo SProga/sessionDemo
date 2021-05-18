@@ -34,8 +34,8 @@ app.use((req, res, next) => {
 });
 
 const allProducts = [
-  { name: "Banana", type: "fruit", price: 7, img: "bananas.svg" },
-  { name: "Apple", type: "fruit", price: 3, img: "apple.svg" },
+  { name: "Banana", type: "fruit", img: "bananas.svg" },
+  { name: "Apple", type: "fruit", img: "apple.svg" },
   {
     name: "WaterMelon",
     type: "fruit",
@@ -43,8 +43,8 @@ const allProducts = [
     img: "watermelon.svg",
     qty: 0,
   },
-  { name: "Kiwi", type: "fruit", price: 3, img: "kiwi.svg" },
-  { name: "Grapes", type: "fruit", price: 5, img: "grapes.svg" },
+  { name: "Kiwi", type: "fruit", img: "kiwi.svg" },
+  { name: "Grapes", type: "fruit", img: "grapes.svg" },
 ];
 
 app.get("/", (req, res) => {
@@ -68,6 +68,7 @@ app.post("/cart", (req, res) => {
   if (!isAdded) {
     item.qty = 0;
     item.qty++;
+    item.price = PRODUCT_PRICES[item["name"]];
     cart.push(item);
   } else {
     item.qty++;
