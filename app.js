@@ -96,6 +96,19 @@ app.post("/cart/removeItem", (req, res) => {
   res.send(item);
 });
 
+app.post("/confirmation", (req, res) => {
+  const { flag } = req.body;
+  let firmation = null;
+  if (flag === 1) {
+    const emptyCart = cart.splice(0, cart.length);
+    req.session.cart = null;
+    firmation = "Purchased successfully";
+  } else {
+    firmation = "Opps Something went wrong";
+  }
+  res.json(firmation);
+});
+
 app.listen(3000, () => {
   console.log("server started on port 3000");
 });

@@ -90,8 +90,10 @@ window.addEventListener("load", (event) => {
     return await axios.get("/cart/all").then((response) => {
       const product = response.data;
       if (product.length) {
+        checkoutbtn.disabled = false;
         checkoutCart(product);
       } else {
+        checkoutbtn.disabled = true;
         emptyCart();
       }
     });
@@ -100,7 +102,6 @@ window.addEventListener("load", (event) => {
   const checkoutCart = function (product) {
     let table = document.querySelector(".table");
     let Total = 0;
-
     table.innerHTML =
       "<tr class='table-heading'><th>Item</th><th>Remove</th><th>Amount</th><th>Price</th></tr>";
     if (product.length > 0) {
@@ -144,8 +145,50 @@ window.addEventListener("load", (event) => {
 
   let checkoutbtn = document.querySelector(".btn-checkout");
   let overlay = document.querySelector(".overlay");
+  let checkoutCard = document.querySelector(".confirm-card");
+  let confirm = document.querySelector(".btn--confirm");
+
+  confirm.addEventListener("click", async () => {
+    await axios
+      .post("/confirmation", {
+        flag: 1,
+      })
+      .then((response) => {
+        dismissOverlay(overlay);
+        dismissOverlay(checkoutCard);
+        checkoutProduct();
+        let h1 = document.createElement("H1");
+        h1.classList.add("flash");
+        h1.innerHTML = response.data;
+        document.body.prepend(h1);
+        setTimeout(() => {
+          h1.remove();
+        }, 3000);
+      })
+      .catch((e) => console.log(e));
+  });
+
+  const showOverlay = (el) => {
+    el.style.opacity = "1";
+    el.style.visibility = "visible";
+  };
+
+  const dismissOverlay = (el) => {
+    el.style.opacity = "0";
+    el.style.visibility = "hidden";
+  };
+
   checkoutbtn.addEventListener("click", () => {
-    overlay.style.opacity = "1";
-    overlay.style.visibility = "visible";
+    showOverlay(overlay);
+    showOverlay(checkoutCard);
+  });
+  let cancel = document.querySelector(".btn--cancel");
+  cancel.addEventListener("click", () => {
+    dismissOverlay(overlay);
+    dismissOverlay(checkoutCard);
+  });
+  overlay.addEventListener("click", function () {
+    dismissOverlay(this);
+    dismissOverlay(checkoutCard);
   });
 });
