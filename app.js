@@ -36,7 +36,13 @@ app.use((req, res, next) => {
 const allProducts = [
   { name: "Banana", type: "fruit", price: 7, img: "bananas.svg" },
   { name: "Apple", type: "fruit", price: 3, img: "apple.svg" },
-  { name: "WaterMelon", type: "fruit", price: 1, img: "watermelon.svg" },
+  {
+    name: "WaterMelon",
+    type: "fruit",
+    price: 1,
+    img: "watermelon.svg",
+    qty: 0,
+  },
   { name: "Kiwi", type: "fruit", price: 3, img: "kiwi.svg" },
   { name: "Grapes", type: "fruit", price: 5, img: "grapes.svg" },
 ];
@@ -58,13 +64,16 @@ app.post("/cart", (req, res) => {
   const filter = allProducts.filter((item) => item["name"] === product);
   const item = filter[0];
   const isAdded = cart.includes(item);
+
   if (!isAdded) {
-    item.qty = 1;
+    item.qty = 0;
+    item.qty++;
     cart.push(item);
   } else {
     item.qty++;
     item.price = item.price + PRODUCT_PRICES[item["name"]];
   }
+  console.log(item);
   req.session.cart = cart;
   res.send(item);
 });
@@ -81,7 +90,7 @@ app.post("/cart/removeItem", (req, res) => {
 
   if (cart && cart.length > 0) {
     if (item.qty >= 1) {
-      item.qty--;
+      item.qty = item.qty - 1;
       item.price = item.price - PRODUCT_PRICES[item["name"]];
     }
     if (item.qty == 0) {

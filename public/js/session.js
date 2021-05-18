@@ -76,16 +76,6 @@ window.addEventListener("load", (event) => {
       .catch((err) => console.log(err));
   };
 
-  const productQuantityHandlers = () => {
-    let removebutton = document.querySelectorAll(".remove");
-    removebutton.forEach((btn) => {
-      btn.addEventListener("click", function () {
-        const product = btn.parentElement.previousSibling.textContent;
-        removeProduct(product);
-      });
-    });
-  };
-
   const checkoutProduct = async () => {
     return await axios.get("/cart/all").then((response) => {
       const product = response.data;
@@ -118,7 +108,6 @@ window.addEventListener("load", (event) => {
         cell3.innerHTML = "<td>" + product[i]["qty"] + "</td>";
         cell4.innerHTML = "<td>" + "$" + product[i]["price"] + "</td>";
         Total = Total + product[i]["price"];
-        productQuantityHandlers();
       }
     }
     let pricerow = table.insertRow(-1);
@@ -130,6 +119,14 @@ window.addEventListener("load", (event) => {
     total.style.backgroundColor = "#fff";
     priceCell.innerHTML = "<td>$" + Total + "</td>";
     priceCell.style.backgroundColor = "#fff";
+
+    let removebutton = document.querySelectorAll(".remove");
+    removebutton.forEach((btn) => {
+      btn.addEventListener("click", function () {
+        const product = btn.parentElement.previousSibling.textContent;
+        removeProduct(product);
+      });
+    });
   };
   function emptyCart() {
     let table = document.querySelector(".table");
